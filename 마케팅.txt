@@ -1,0 +1,2237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MARKET MIND</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, Pretendard, Arial, sans-serif;
+      background: #f6f7fb;
+      color: #20202a;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+
+    header {
+      height: 72px;
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 0 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #635bff;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 14px;
+      color: #777;
+    }
+
+    .budget {
+      background: #f0efff;
+      color: #635bff;
+      padding: 9px 15px;
+      border-radius: 10px;
+      font-weight: 800;
+    }
+
+    /* COMMON */
+
+    .screen {
+      min-height: calc(100vh - 72px);
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: auto;
+      padding: 55px 25px 80px;
+    }
+
+    .narrow {
+      max-width: 720px;
+    }
+
+    .back {
+      border: none;
+      background: none;
+      color: #777;
+      margin-bottom: 40px;
+    }
+
+    .phase {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .phase span {
+      color: #635bff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .phase strong {
+      font-size: 13px;
+    }
+
+    .page-title {
+      margin-bottom: 35px;
+    }
+
+    .page-title small {
+      color: #635bff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .page-title h2 {
+      margin: 10px 0;
+      font-size: 38px;
+      letter-spacing: -2px;
+    }
+
+    .page-title p {
+      color: #888;
+    }
+
+    /* BUTTON */
+
+    .primary {
+      background: #635bff;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 15px 25px;
+      font-weight: 800;
+      box-shadow: 0 10px 25px rgba(99,91,255,.2);
+      transition: .2s;
+    }
+
+    .primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .secondary {
+      background: white;
+      color: #333;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 15px 25px;
+      font-weight: 800;
+    }
+
+    .full {
+      width: 100%;
+    }
+
+    /* HOME */
+
+    .home {
+      min-height: calc(100vh - 72px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #f0efff;
+      color: #635bff;
+      padding: 8px 13px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .home h1 {
+      margin: 25px 0 15px;
+      font-size: clamp(45px, 7vw, 78px);
+      line-height: 1.05;
+      letter-spacing: -4px;
+    }
+
+    .purple {
+      color: #635bff;
+    }
+
+    .home p {
+      color: #777;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    .home-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .home-cards {
+      display: flex;
+      gap: 12px;
+      margin-top: 60px;
+    }
+
+    .home-card {
+      width: 150px;
+      background: white;
+      border: 1px solid #e7e7e7;
+      border-radius: 15px;
+      padding: 18px;
+    }
+
+    .home-card strong {
+      display: block;
+      color: #635bff;
+      margin-bottom: 8px;
+    }
+
+    .home-card span {
+      font-size: 13px;
+      color: #777;
+    }
+
+    /* FORM */
+
+    .form-card,
+    .bid-card,
+    .selected-content {
+      background: white;
+      border: 1px solid #e7e7e7;
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      margin: 22px 0 9px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 14px;
+      outline: none;
+    }
+
+    .players {
+      display: grid;
+      grid-template-columns: repeat(7,1fr);
+      gap: 7px;
+    }
+
+    .players button {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 9px;
+      padding: 12px 5px;
+    }
+
+    .players button.active {
+      background: #635bff;
+      color: white;
+      border-color: #635bff;
+    }
+
+    .markets {
+      display: grid;
+      grid-template-columns: repeat(5,1fr);
+      gap: 8px;
+      margin-bottom: 25px;
+    }
+
+    .market {
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 12px;
+      padding: 15px 5px;
+      text-align: center;
+    }
+
+    .market .icon {
+      display: block;
+      font-size: 23px;
+      margin-bottom: 7px;
+    }
+
+    .market.active {
+      border-color: #635bff;
+      background: #f0efff;
+      color: #635bff;
+    }
+
+    /* HINT */
+
+    .status {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .status-box {
+      flex: 1;
+      background: white;
+      border: 1px solid #e7e7e7;
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .status-box span,
+    .status-box strong {
+      display: block;
+    }
+
+    .status-box span {
+      color: #999;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .status-box strong {
+      font-size: 22px;
+    }
+
+    .hint-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 15px;
+    }
+
+    .hint {
+      min-height: 245px;
+      background: white;
+      border: 1px solid #e7e7e7;
+      border-radius: 18px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hint.bought {
+      border-color: #635bff;
+    }
+
+    .number {
+      color: #635bff;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .hint h3 {
+      margin: 22px 0 8px;
+    }
+
+    .hint p {
+      color: #888;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .hint button {
+      margin-top: auto;
+      border: none;
+      background: #f0efff;
+      color: #635bff;
+      border-radius: 10px;
+      padding: 12px;
+      font-weight: 800;
+    }
+
+    .hint-result {
+      margin-top: auto;
+      background: #f7f7ff;
+      padding: 13px;
+      border-radius: 10px;
+      color: #635bff;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .hint-result small {
+      display: block;
+      color: #777;
+      margin-top: 7px;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    /* CONTENT */
+
+    .contents {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 15px;
+    }
+
+    .content {
+      text-align: left;
+      background: white;
+      border: 1px solid #e7e7e7;
+      border-radius: 18px;
+      padding: 25px;
+      transition: .2s;
+    }
+
+    .content:hover {
+      transform: translateY(-3px);
+      border-color: #635bff;
+    }
+
+    .content-top {
+      display: flex;
+      justify-content: space-between;
+      color: #999;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .content-icon {
+      width: 52px;
+      height: 52px;
+      margin-top: 28px;
+      background: #f0efff;
+      color: #635bff;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .content h3 {
+      margin: 22px 0 8px;
+    }
+
+    .content p {
+      color: #888;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .bar {
+      height: 5px;
+      background: #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .bar i {
+      display: block;
+      height: 100%;
+      background: #635bff;
+    }
+
+    .content-stat {
+      margin-top: 20px;
+    }
+
+    .content-stat span {
+      font-size: 11px;
+      color: #999;
+    }
+
+    /* BID */
+
+    .selected-content {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .selected-content .content-icon {
+      margin: 0;
+      flex-shrink: 0;
+    }
+
+    .selected-content small {
+      color: #999;
+    }
+
+    .selected-content h3 {
+      margin: 5px 0;
+    }
+
+    .selected-content p {
+      color: #888;
+      font-size: 13px;
+    }
+
+    .bid-money {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+
+    .bid-money span {
+      color: #999;
+      font-size: 13px;
+    }
+
+    .bid-money strong {
+      font-size: 24px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #635bff;
+    }
+
+    .bid-value {
+      text-align: center;
+      color: #635bff;
+      font-size: 42px;
+      font-weight: 900;
+      margin: 20px;
+    }
+
+    /* MARKETING */
+
+    .acquired {
+      background: #f0efff;
+      padding: 18px 20px;
+      border-radius: 14px;
+      margin-bottom: 15px;
+    }
+
+    .acquired span {
+      display: block;
+      color: #635bff;
+      font-size: 10px;
+      font-weight: 900;
+      margin-bottom: 5px;
+    }
+
+    .marketing {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 15px;
+    }
+
+    .marketing-card {
+      text-align: left;
+      background: white;
+      border: 1px solid #e7e7e7;
+      border-radius: 18px;
+      padding: 25px;
+      transition: .2s;
+    }
+
+    .marketing-card:hover {
+      transform: translateY(-3px);
+      border-color: #635bff;
+    }
+
+    .marketing-card span {
+      color: #635bff;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .marketing-card h3 {
+      margin: 20px 0 8px;
+    }
+
+    .marketing-card p {
+      color: #888;
+      line-height: 1.6;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .marketing-card strong {
+      font-size: 13px;
+    }
+
+    /* EVENT */
+
+    .event,
+    .result {
+      min-height: calc(100vh - 72px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .event-icon {
+      width: 90px;
+      height: 90px;
+      margin: 30px 0;
+      border-radius: 50%;
+      background: #635bff;
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 45px;
+      font-weight: 900;
+    }
+
+    .event h2 {
+      font-size: 42px;
+      letter-spacing: -2px;
+      margin-bottom: 15px;
+    }
+
+    .event p {
+      max-width: 550px;
+      color: #888;
+      line-height: 1.7;
+    }
+
+    .event-effect {
+      display: flex;
+      gap: 20px;
+      background: white;
+      border: 1px solid #e7e7e7;
+      border-radius: 12px;
+      padding: 18px 25px;
+      margin: 25px 0;
+    }
+
+    .event-effect span {
+      color: #999;
+    }
+
+    .event-effect strong {
+      color: #635bff;
+    }
+
+    /* RESULT */
+
+    .result h1 {
+      font-size: clamp(40px,6vw,65px);
+      line-height: 1.1;
+      letter-spacing: -3px;
+      margin: 25px 0 15px;
+    }
+
+    .result > p {
+      color: #888;
+    }
+
+    .score {
+      margin: 40px 0;
+    }
+
+    .score span {
+      color: #999;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .score strong {
+      display: block;
+      color: #635bff;
+      font-size: 55px;
+      margin-top: 8px;
+    }
+
+    .result-stats {
+      display: flex;
+      width: min(650px,100%);
+      gap: 10px;
+    }
+
+    .result-stat {
+      flex: 1;
+      background: white;
+      border: 1px solid #e7e7e7;
+      border-radius: 13px;
+      padding: 18px;
+    }
+
+    .result-stat span,
+    .result-stat strong {
+      display: block;
+    }
+
+    .result-stat span {
+      color: #999;
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+
+    .result-message {
+      width: min(650px,100%);
+      background: white;
+      border: 1px solid #e7e7e7;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: left;
+      margin: 20px 0;
+    }
+
+    .result-message strong {
+      color: #635bff;
+    }
+
+    .result-message p {
+      color: #888;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    .result-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* RULES */
+
+    .rules {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 15px;
+    }
+
+    .rule {
+      background: white;
+      border: 1px solid #e7e7e7;
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .rule b {
+      color: #635bff;
+    }
+
+    .rule h3 {
+      margin: 20px 0 8px;
+    }
+
+    .rule p {
+      color: #888;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .message {
+      background: white;
+      border: 1px solid #e7e7e7;
+      border-radius: 10px;
+      padding: 13px 16px;
+      margin-top: 15px;
+      color: #635bff;
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:700px) {
+
+      header {
+        padding: 0 20px;
+      }
+
+      .header-right span:first-child {
+        display: none;
+      }
+
+      .home h1 {
+        font-size: 48px;
+        letter-spacing: -3px;
+      }
+
+      .home-cards {
+        width: 100%;
+      }
+
+      .home-card {
+        flex: 1;
+        width: auto;
+      }
+
+      .hint-grid,
+      .contents,
+      .marketing,
+      .rules {
+        grid-template-columns: 1fr;
+      }
+
+      .markets {
+        grid-template-columns: repeat(3,1fr);
+      }
+
+      .players {
+        grid-template-columns: repeat(4,1fr);
+      }
+
+      .result-stats {
+        flex-direction: column;
+      }
+
+      .page-title h2 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header>
+    <div class="logo">
+      MARKET<span>MIND</span>
+    </div>
+
+    <div class="header-right" id="headerRight"></div>
+  </header>
+
+  <main id="app"></main>
+
+</div>
+
+
+<script>
+
+const markets = {
+
+  KPOP: {
+    name: "K-POP",
+    icon: "♪",
+    contents: [
+      ["글로벌 아이돌 신곡","이미 팬덤을 확보한 인기 아이돌의 신곡",92,95],
+      ["감성 발라드 신곡","음원 중심의 대중적인 발라드 콘텐츠",72,55],
+      ["신인 걸그룹 데뷔","새로운 콘셉트의 신인 걸그룹 프로젝트",84,42],
+      ["글로벌 컬래버 프로젝트","해외 아티스트와 함께하는 대형 프로젝트",89,76]
+    ]
+  },
+
+  DRAMA: {
+    name: "드라마",
+    icon: "▣",
+    contents: [
+      ["스타 배우 로맨스","인기 배우가 출연하는 로맨스 드라마",88,90],
+      ["신인 작가 미스터리","새로운 세계관의 미스터리 드라마",82,45],
+      ["웹툰 원작 드라마","인기 웹툰 IP를 활용한 드라마",94,86],
+      ["글로벌 OTT 오리지널","해외 시장을 겨냥한 대형 오리지널",91,72]
+    ]
+  },
+
+  MOVIE: {
+    name: "영화",
+    icon: "▶",
+    contents: [
+      ["대형 액션 블록버스터","높은 제작비의 대형 액션 영화",87,78],
+      ["감성 독립영화","작품성과 입소문을 중심으로 한 영화",70,38],
+      ["인기 웹툰 원작","대중적인 웹툰 IP를 영화화한 작품",93,88],
+      ["글로벌 공동제작","해외 제작사와 함께하는 프로젝트",85,67]
+    ]
+  },
+
+  WEBTOON: {
+    name: "웹툰",
+    icon: "▤",
+    contents: [
+      ["로맨스 신작","10~20대를 겨냥한 신규 로맨스 작품",90,64],
+      ["액션 대작","강한 세계관을 가진 액션 웹툰",92,82],
+      ["일상 공감툰","SNS에서 확산되기 쉬운 일상 콘텐츠",81,53],
+      ["글로벌 연재작","해외 독자를 동시에 겨냥한 작품",88,70]
+    ]
+  },
+
+  GAME: {
+    name: "게임",
+    icon: "◈",
+    contents: [
+      ["모바일 RPG 신작","대규모 팬층을 목표로 하는 모바일 RPG",91,84],
+      ["인디 게임 신작","독창적인 아이디어를 가진 소규모 게임",78,48],
+      ["글로벌 MMORPG","글로벌 시장을 겨냥한 대형 MMORPG",94,90],
+      ["IP 기반 게임","유명 콘텐츠 IP를 활용한 게임",89,86]
+    ]
+  }
+
+};
+
+
+const companies = [
+
+  {
+    name:"A Corporation",
+    type:"대형 공격형",
+    money:1800,
+    share:35,
+    image:65
+  },
+
+  {
+    name:"B Studio",
+    type:"브랜드 전략형",
+    money:1500,
+    share:25,
+    image:90
+  },
+
+  {
+    name:"Culture Lab",
+    type:"혁신 추구형",
+    money:1300,
+    share:18,
+    image:70
+  },
+
+  {
+    name:"Fan Network",
+    type:"팬덤 중심형",
+    money:1400,
+    share:22,
+    image:82
+  }
+
+];
+
+
+const hints = [
+
+  {
+    title:"시장 분석",
+    desc:"현재 시장에서 어떤 콘텐츠가 주목받는지 확인합니다.",
+    cost:100
+  },
+
+  {
+    title:"소비자 분석",
+    desc:"타깃 소비자가 어떤 콘텐츠를 선호하는지 확인합니다.",
+    cost:150
+  },
+
+  {
+    title:"경쟁사 분석",
+    desc:"경쟁사들이 어떤 콘텐츠에 관심을 보이는지 확인합니다.",
+    cost:200
+  },
+
+  {
+    title:"트렌드 예측",
+    desc:"다음 시장의 트렌드를 예측합니다.",
+    cost:250
+  }
+
+];
+
+
+const events = [
+
+  ["갑작스러운 글로벌 바이럴",
+   "예상하지 못한 해외 팬덤의 유입으로 콘텐츠 가치가 상승했습니다.",250],
+
+  ["소비자 취향 변화",
+   "시장 분위기가 급변했습니다. 새로운 콘텐츠가 주목받습니다.",180],
+
+  ["경쟁사 전략 유출",
+   "경쟁사의 마케팅 전략 일부가 공개되었습니다.",120]
+
+];
+
+
+let state = {
+
+  screen:"home",
+
+  market:"KPOP",
+
+  company:null,
+
+  money:0,
+
+  share:0,
+
+  image:0,
+
+  roomName:"",
+
+  players:4,
+
+  boughtHints:[],
+
+  selectedContent:null,
+
+  acquired:false,
+
+  bid:300,
+
+  event:null,
+
+  finalScore:0
+
+};
+
+
+function currentMarket(){
+
+  return markets[state.market];
+
+}
+
+
+function renderHeader(){
+
+  const el = document.getElementById("headerRight");
+
+  if(state.screen === "home" || state.screen === "rules" || state.screen === "room"){
+
+    el.innerHTML = "";
+
+    return;
+
+  }
+
+  el.innerHTML = `
+
+    <span>${state.company ? state.company.name : ""}</span>
+
+    <span class="budget">
+      ${state.money.toLocaleString()}P
+    </span>
+
+  `;
+
+}
+
+
+function render(){
+
+  renderHeader();
+
+  const app = document.getElementById("app");
+
+  if(state.screen === "home"){
+
+    app.innerHTML = home();
+
+  }
+
+  else if(state.screen === "rules"){
+
+    app.innerHTML = rules();
+
+  }
+
+  else if(state.screen === "room"){
+
+    app.innerHTML = room();
+
+  }
+
+  else if(state.screen === "hints"){
+
+    app.innerHTML = hintScreen();
+
+  }
+
+  else if(state.screen === "contents"){
+
+    app.innerHTML = contentScreen();
+
+  }
+
+  else if(state.screen === "bid"){
+
+    app.innerHTML = bidScreen();
+
+  }
+
+  else if(state.screen === "marketing"){
+
+    app.innerHTML = marketingScreen();
+
+  }
+
+  else if(state.screen === "event"){
+
+    app.innerHTML = eventScreen();
+
+  }
+
+  else if(state.screen === "result"){
+
+    app.innerHTML = resultScreen();
+
+  }
+
+}
+
+
+function home(){
+
+  return `
+
+    <section class="home screen">
+
+      <div class="badge">
+        MARKETING STRATEGY GAME
+      </div>
+
+      <h1>
+        시장을 읽고,<br>
+        <span class="purple">먼저 움직여라.</span>
+      </h1>
+
+      <p>
+        문화 콘텐츠를 선택하고<br>
+        기업의 전략으로 시장을 장악하세요.
+      </p>
+
+      <div class="home-buttons">
+
+        <button class="primary"
+          onclick="goRoom()">
+          바로 플레이
+        </button>
+
+        <button class="secondary"
+          onclick="go('rules')">
+          게임 방법
+        </button>
+
+      </div>
+
+      <div class="home-cards">
+
+        <div class="home-card">
+          <strong>01</strong>
+          <span>정보 확보</span>
+        </div>
+
+        <div class="home-card">
+          <strong>02</strong>
+          <span>콘텐츠 경쟁</span>
+        </div>
+
+        <div class="home-card">
+          <strong>03</strong>
+          <span>시장 장악</span>
+        </div>
+
+      </div>
+
+    </section>
+
+  `;
+
+}
+
+
+function rules(){
+
+  const data = [
+
+    ["01","문화 시장 선택",
+     "K-POP, 드라마, 영화, 웹툰, 게임 중 하나를 선택합니다."],
+
+    ["02","정보 확보",
+     "예산을 사용해 시장·소비자·경쟁사·트렌드 정보를 구매합니다."],
+
+    ["03","콘텐츠 확보",
+     "4개의 콘텐츠 중 원하는 콘텐츠에 전략적으로 제안합니다."],
+
+    ["04","마케팅 경쟁",
+     "SNS, 팬덤, 글로벌, 브랜드 전략 중 하나를 선택합니다."],
+
+    ["05","시장 반전",
+     "예상하지 못한 이벤트가 발생해 전략이 다시 바뀝니다."],
+
+    ["06","최종 결과",
+     "예산·시장점유율·기업이미지를 종합해 최종 순위를 결정합니다."]
+
+  ];
+
+  return `
+
+    <section class="page">
+
+      <button class="back"
+        onclick="go('home')">
+        ← 돌아가기
+      </button>
+
+      <div class="page-title">
+
+        <small>HOW TO PLAY</small>
+
+        <h2>게임 방법</h2>
+
+        <p>
+          정보와 전략을 활용해 경쟁사보다 높은 기업가치를 만드세요.
+        </p>
+
+      </div>
+
+      <div class="rules">
+
+        ${data.map(x=>`
+
+          <div class="rule">
+
+            <b>${x[0]}</b>
+
+            <h3>${x[1]}</h3>
+
+            <p>${x[2]}</p>
+
+          </div>
+
+        `).join("")}
+
+      </div>
+
+    </section>
+
+  `;
+
+}
+
+
+function goRoom(){
+
+  state.roomName = "";
+
+  go("room");
+
+}
+
+
+function room(){
+
+  return `
+
+    <section class="page narrow">
+
+      <button class="back"
+        onclick="go('home')">
+        ← 돌아가기
+      </button>
+
+      <div class="page-title">
+
+        <small>CREATE ROOM</small>
+
+        <h2>게임 설정</h2>
+
+        <p>
+          어떤 시장에서 경쟁할지 선택하세요.
+        </p>
+
+      </div>
+
+      <div class="form-card">
+
+        <label>방 이름</label>
+
+        <input
+          id="roomName"
+          type="text"
+          placeholder="예: K-Content Battle"
+          value="${state.roomName}"
+        >
+
+        <label>플레이어 수</label>
+
+        <div class="players">
+
+          ${[2,3,4,5,6,7,8].map(n=>`
+
+            <button
+              class="${state.players===n ? 'active':''}"
+              onclick="setPlayers(${n})">
+              ${n}
+            </button>
+
+          `).join("")}
+
+        </div>
+
+        <label>문화 시장</label>
+
+        <div class="markets">
+
+          ${Object.entries(markets).map(([key,m])=>`
+
+            <button
+              class="market ${state.market===key?'active':''}"
+              onclick="setMarket('${key}')">
+
+              <span class="icon">
+                ${m.icon}
+              </span>
+
+              ${m.name}
+
+            </button>
+
+          `).join("")}
+
+        </div>
+
+        <button
+          class="primary full"
+          onclick="startGame()">
+          게임 시작
+        </button>
+
+      </div>
+
+    </section>
+
+  `;
+
+}
+
+
+function setPlayers(n){
+
+  state.players=n;
+
+  render();
+
+}
+
+
+function setMarket(m){
+
+  state.market=m;
+
+  render();
+
+}
+
+
+function startGame(){
+
+  const input = document.getElementById("roomName");
+
+  if(input){
+
+    state.roomName = input.value || "MARKET MIND";
+
+  }
+
+  const company =
+    companies[Math.floor(Math.random()*companies.length)];
+
+  state.company = company;
+
+  state.money = company.money;
+
+  state.share = company.share;
+
+  state.image = company.image;
+
+  state.boughtHints=[];
+
+  state.selectedContent=null;
+
+  state.acquired=false;
+
+  state.bid=300;
+
+  go("hints");
+
+}
+
+
+function hintScreen(){
+
+  return `
+
+    <section class="page">
+
+      <div class="phase">
+
+        <span>PHASE 01</span>
+
+        <strong>정보 확보</strong>
+
+      </div>
+
+      <div class="page-title">
+
+        <small>${currentMarket().name}</small>
+
+        <h2>정보를 확보하세요</h2>
+
+        <p>
+          필요한 정보만 선택해 예산을 전략적으로 사용하세요.
+        </p>
+
+      </div>
+
+      <div class="status">
+
+        <div class="status-box">
+
+          <span>현재 예산</span>
+
+          <strong>
+            ${state.money.toLocaleString()}P
+          </strong>
+
+        </div>
+
+        <div class="status-box">
+
+          <span>확보 정보</span>
+
+          <strong>
+            ${state.boughtHints.length} / 4
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="hint-grid">
+
+        ${hints.map((h,i)=>{
+
+          const bought =
+            state.boughtHints.includes(i);
+
+          return `
+
+            <div class="hint ${bought?'bought':''}">
+
+              <div class="number">
+                0${i+1}
+              </div>
+
+              <h3>${h.title}</h3>
+
+              <p>${h.desc}</p>
+
+              ${
+                bought
+
+                ?
+
+                `<div class="hint-result">
+                  ✓ 정보 확보
+                  <small>${hintText(i)}</small>
+                </div>`
+
+                :
+
+                `<button onclick="buyHint(${i})">
+                  ${h.cost}P로 확인
+                </button>`
+              }
+
+            </div>
+
+          `;
+
+        }).join("")}
+
+      </div>
+
+      <button
+        class="primary"
+        style="margin-top:25px"
+        onclick="go('contents')">
+        콘텐츠 확인하기 →
+      </button>
+
+    </section>
+
+  `;
+
+}
+
+
+function hintText(i){
+
+  const c=currentMarket().contents;
+
+  if(i===0){
+
+    const best=[...c].sort((a,b)=>b[2]-a[2])[0];
+
+    return `시장 관심도가 높은 콘텐츠는 "${best[0]}"입니다.`;
+
+  }
+
+  if(i===1){
+
+    const best=[...c].sort((a,b)=>b[3]-a[3])[0];
+
+    return `소비자 반응이 가장 강할 콘텐츠는 "${best[0]}"입니다.`;
+
+  }
+
+  if(i===2){
+
+    return "경쟁사들이 글로벌 확장형 콘텐츠에 관심을 보이고 있습니다.";
+
+  }
+
+  return "새로운 조합과 글로벌 확장성을 가진 콘텐츠가 유리합니다.";
+
+}
+
+
+function buyHint(i){
+
+  const h=hints[i];
+
+  if(state.boughtHints.includes(i)) return;
+
+  if(state.money<h.cost){
+
+    alert("예산이 부족합니다.");
+
+    return;
+
+  }
+
+  state.money-=h.cost;
+
+  state.boughtHints.push(i);
+
+  render();
+
+}
+
+
+function contentScreen(){
+
+  const c=currentMarket();
+
+  return `
+
+    <section class="page">
+
+      <div class="phase">
+
+        <span>PHASE 02</span>
+
+        <strong>콘텐츠 경쟁</strong>
+
+      </div>
+
+      <div class="page-title">
+
+        <small>${c.name}</small>
+
+        <h2>어떤 콘텐츠를 선택할 것인가?</h2>
+
+        <p>
+          4개의 콘텐츠 중 시장의 주인공이 될 콘텐츠를 예측하세요.
+        </p>
+
+      </div>
+
+      <div class="contents">
+
+        ${c.contents.map((x,i)=>`
+
+          <button
+            class="content"
+            onclick="selectContent(${i})">
+
+            <div class="content-top">
+
+              <span>CONTENT 0${i+1}</span>
+
+              <span>→</span>
+
+            </div>
+
+            <div class="content-icon">
+              ${c.icon}
+            </div>
+
+            <h3>${x[0]}</h3>
+
+            <p>${x[1]}</p>
+
+            <div class="content-stat">
+
+              <span>
+                시장 관심도
+              </span>
+
+              <div class="bar">
+                <i style="width:${x[2]}%"></i>
+              </div>
+
+            </div>
+
+          </button>
+
+        `).join("")}
+
+      </div>
+
+    </section>
+
+  `;
+
+}
+
+
+function selectContent(i){
+
+  state.selectedContent=i;
+
+  state.bid=Math.min(300,state.money);
+
+  go("bid");
+
+}
+
+
+function bidScreen(){
+
+  const c=currentMarket();
+
+  const content=c.contents[state.selectedContent];
+
+  return `
+
+    <section class="page narrow">
+
+      <div class="phase">
+
+        <span>PHASE 03</span>
+
+        <strong>콘텐츠 확보</strong>
+
+      </div>
+
+      <div class="page-title">
+
+        <small>STRATEGIC ACQUISITION</small>
+
+        <h2>얼마를 제안하시겠습니까?</h2>
+
+        <p>
+          가장 높은 전략적 제안을 한 기업이 콘텐츠를 확보합니다.
+        </p>
+
+      </div>
+
+      <div class="selected-content">
+
+        <div class="content-icon">
+          ${c.icon}
+        </div>
+
+        <div>
+
+          <small>선택 콘텐츠</small>
+
+          <h3>${content[0]}</h3>
+
+          <p>${content[1]}</p>
+
+        </div>
+
+      </div>
+
+      <div class="bid-card">
+
+        <div class="bid-money">
+
+          <span>현재 예산</span>
+
+          <strong>
+            ${state.money.toLocaleString()}P
+          </strong>
+
+        </div>
+
+        <label>
+          전략적 제안 금액
+        </label>
+
+        <input
+          type="range"
+          min="100"
+          max="${Math.max(state.money,100)}"
+          step="50"
+          value="${state.bid}"
+          oninput="updateBid(this.value)"
+        >
+
+        <div class="bid-value">
+          ${state.bid}P
+        </div>
+
+        <button
+          class="primary full"
+          onclick="submitBid()">
+          제안 제출
+        </button>
+
+      </div>
+
+    </section>
+
+  `;
+
+}
+
+
+function updateBid(value){
+
+  state.bid=Number(value);
+
+  const valueEl =
+    document.querySelector(".bid-value");
+
+  if(valueEl){
+
+    valueEl.textContent =
+      state.bid.toLocaleString()+"P";
+
+  }
+
+}
+
+
+function submitBid(){
+
+  const aiBid =
+    Math.floor(250 + Math.random()*500);
+
+  if(state.bid>state.money){
+
+    alert("예산보다 높은 금액은 제안할 수 없습니다.");
+
+    return;
+
+  }
+
+  if(state.bid>=aiBid){
+
+    state.acquired=true;
+
+    state.money-=state.bid;
+
+    alert(
+      "콘텐츠 확보 성공!\n"+
+      "경쟁사의 제안가: "+
+      aiBid+"P"
+    );
+
+  }
+
+  else{
+
+    state.acquired=false;
+
+    alert(
+      "콘텐츠 확보 실패!\n"+
+      "경쟁사의 제안가: "+
+      aiBid+"P"
+    );
+
+  }
+
+  go("marketing");
+
+}
+
+
+function marketingScreen(){
+
+  return `
+
+    <section class="page">
+
+      <div class="phase">
+
+        <span>PHASE 04</span>
+
+        <strong>마케팅 전략</strong>
+
+      </div>
+
+      <div class="page-title">
+
+        <small>MARKETING STRATEGY</small>
+
+        <h2>
+          ${
+            state.acquired
+            ?
+            "확보한 콘텐츠를 성장시키세요"
+            :
+            "새로운 전략을 선택하세요"
+          }
+        </h2>
+
+        <p>
+          어떤 마케팅 전략을 선택하느냐에 따라 결과가 달라집니다.
+        </p>
+
+      </div>
+
+      ${
+        state.acquired
+
+        ?
+
+        `<div class="acquired">
+
+          <span>ACQUIRED</span>
+
+          <strong>
+            ${currentMarket().contents[state.selectedContent][0]}
+          </strong>
+
+        </div>`
+
+        :
+
+        ""
+      }
+
+      <div class="marketing">
+
+        <button
+          class="marketing-card"
+          onclick="marketing('sns')">
+
+          <span>01</span>
+
+          <h3>SNS 바이럴</h3>
+
+          <p>
+            빠른 확산으로 대중의 관심을 확보합니다.
+          </p>
+
+          <strong>
+            시장점유율 +8
+          </strong>
+
+        </button>
+
+        <button
+          class="marketing-card"
+          onclick="marketing('fandom')">
+
+          <span>02</span>
+
+          <h3>팬덤 마케팅</h3>
+
+          <p>
+            충성도 높은 팬층을 중심으로 성장합니다.
+          </p>
+
+          <strong>
+            시장점유율 +12
+          </strong>
+
+        </button>
+
+        <button
+          class="marketing-card"
+          onclick="marketing('global')">
+
+          <span>03</span>
+
+          <h3>글로벌 확장</h3>
+
+          <p>
+            해외 시장을 공략해 규모를 확대합니다.
+          </p>
+
+          <strong>
+            시장점유율 +15
+          </strong>
+
+        </button>
+
+        <button
+          class="marketing-card"
+          onclick="marketing('brand')">
+
+          <span>04</span>
+
+          <h3>브랜드 캠페인</h3>
+
+          <p>
+            기업 이미지를 강화하고 장기적인 가치를 만듭니다.
+          </p>
+
+          <strong>
+            기업이미지 +12
+          </strong>
+
+        </button>
+
+      </div>
+
+    </section>
+
+  `;
+
+}
+
+
+function getHitContent(){
+
+  const contents=currentMarket().contents;
+
+  let best=0;
+  let bestScore=-Infinity;
+
+  contents.forEach((c,i)=>{
+
+    const score =
+      c[2] +
+      c[3] +
+      Math.random()*20;
+
+    if(score>bestScore){
+
+      bestScore=score;
+      best=i;
+
+    }
+
+  });
+
+  return best;
+
+}
+
+
+function marketing(type){
+
+  if(type==="sns"){
+
+    state.money+=300;
+    state.share+=8;
+    state.image+=2;
+
+  }
+
+  if(type==="fandom"){
+
+    state.money+=380;
+    state.share+=12;
+    state.image+=5;
+
+  }
+
+  if(type==="global"){
+
+    state.money+=450;
+    state.share+=15;
+    state.image+=3;
+
+  }
+
+  if(type==="brand"){
+
+    state.money+=350;
+    state.share+=7;
+    state.image+=12;
+
+  }
+
+  const hit=getHitContent();
+
+  if(
+    state.acquired &&
+    state.selectedContent===hit
+  ){
+
+    state.money+=700;
+    state.share+=15;
+
+  }
+
+  else if(state.acquired){
+
+    state.money-=150;
+
+  }
+
+  state.event =
+    events[Math.floor(Math.random()*events.length)];
+
+  go("event");
+
+}
+
+
+function eventScreen(){
+
+  const e=state.event;
+
+  return `
+
+    <section class="event screen">
+
+      <div class="badge">
+        MARKET EVENT
+      </div>
+
+      <div class="event-icon">
+        !
+      </div>
+
+      <h2>${e[0]}</h2>
+
+      <p>
+        ${e[1]}
+      </p>
+
+      <div class="event-effect">
+
+        <span>시장 변화</span>
+
+        <strong>
+          +${e[2]}P
+        </strong>
+
+      </div>
+
+      <button
+        class="primary"
+        onclick="finishGame()">
+
+        결과 확인하기
+
+      </button>
+
+    </section>
+
+  `;
+
+}
+
+
+function finishGame(){
+
+  const eventBonus=state.event[2];
+
+  state.finalScore=Math.round(
+
+    state.money +
+
+    eventBonus +
+
+    state.share*20 +
+
+    state.image*10 +
+
+    (state.acquired ? 500 : 0)
+
+  );
+
+  go("result");
+
+}
+
+
+function resultScreen(){
+
+  return `
+
+    <section class="result screen">
+
+      <div class="badge">
+        GAME COMPLETE
+      </div>
+
+      <h1>
+
+        시장의 승자는<br>
+
+        <span class="purple">
+          ${state.company.name}
+        </span>
+
+      </h1>
+
+      <p>
+        당신의 전략이 이번 시장에서 만든 최종 기업가치입니다.
+      </p>
+
+      <div class="score">
+
+        <span>FINAL VALUE</span>
+
+        <strong>
+          ${state.finalScore.toLocaleString()}P
+        </strong>
+
+      </div>
+
+      <div class="result-stats">
+
+        <div class="result-stat">
+
+          <span>잔여 예산</span>
+
+          <strong>
+            ${state.money.toLocaleString()}P
+          </strong>
+
+        </div>
+
+        <div class="result-stat">
+
+          <span>시장점유율</span>
+
+          <strong>
+            ${state.share}%
+          </strong>
+
+        </div>
+
+        <div class="result-stat">
+
+          <span>기업 이미지</span>
+
+          <strong>
+            ${state.image}
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="result-message">
+
+        <strong>전략 평가</strong>
+
+        <p>
+          정보를 활용하고 콘텐츠를 선택한 뒤
+          마케팅 전략까지 연결한 것이 이번 게임의 핵심이었습니다.
+        </p>
+
+      </div>
+
+      <div class="result-buttons">
+
+        <button
+          class="primary"
+          onclick="resetGame()">
+          다시 플레이
+        </button>
+
+        <button
+          class="secondary"
+          onclick="go('home')">
+          메인으로
+        </button>
+
+      </div>
+
+    </section>
+
+  `;
+
+}
+
+
+function resetGame(){
+
+  state = {
+
+    screen:"home",
+
+    market:"KPOP",
+
+    company:null,
+
+    money:0,
+
+    share:0,
+
+    image:0,
+
+    roomName:"",
+
+    players:4,
+
+    boughtHints:[],
+
+    selectedContent:null,
+
+    acquired:false,
+
+    bid:300,
+
+    event:null,
+
+    finalScore:0
+
+  };
+
+  render();
+
+}
+
+
+function go(screen){
+
+  state.screen=screen;
+
+  render();
+
+}
+
+
+render();
+
+</script>
+
+</body>
+</html>
